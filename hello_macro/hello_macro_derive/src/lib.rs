@@ -13,3 +13,19 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
     // Build the trait implementation
     impl_hello_macro(&ast)
 }
+
+fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
+    // Get the name of the struct or enum
+    let name = &ast.ident;
+    // Construct the output, which will be the implementation
+    // of the HelloMacro trait
+    let gen = quote! {
+        impl HelloMacro for #name {
+            fn hello_macro() {
+                println!("Hello, Macro! My name is {}", stringify!(#name));
+            }
+        }
+    };
+    // Return the generated impl as a TokenStream
+    gen.into()
+}
