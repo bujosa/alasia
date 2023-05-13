@@ -1,3 +1,9 @@
+use hello_macro::HelloMacro;
+use hello_macro_derive::HelloMacro;
+
+#[derive(HelloMacro)]
+struct DragonBall;
+
 fn main() {
-    println!("Hello, world!");
+    DragonBall::hello_macro();
 }
